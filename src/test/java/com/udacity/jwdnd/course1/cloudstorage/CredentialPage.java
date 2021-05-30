@@ -12,7 +12,6 @@ import java.util.List;
 public class CredentialPage {
 
 
-
     @FindBy(id = "nav-credentials-tab")
     private WebElement credentialsTab;
 
@@ -44,7 +43,6 @@ public class CredentialPage {
     private WebElement editCredential;
 
 
-
     @FindBy(xpath = "//*[@id=\"credentialTable\"]/tbody/tr/td[1]/a")
     private WebElement deleteCredential;
 
@@ -55,7 +53,7 @@ public class CredentialPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void addCredential(String url, String username, String password)   {
+    public void addCredential(String url, String username, String password) {
         this.credentialsTab.click();
         try {
             Thread.sleep(1000);
@@ -85,16 +83,16 @@ public class CredentialPage {
         //  this.notesTab.click();
     }
 
-    public void clickCredentialsTab(){
+    public void clickCredentialsTab() {
         this.credentialsTab.click();
     }
 
-    public String getTablePassword(){
+    public String getTablePassword() {
         return this.credentialTableUserPassword.getText();
     }
 
 
-    public void editNote(String updatedPassword){
+    public void editNote(String updatedPassword) {
         System.out.println("Clicking Edit Button");
         try {
             Thread.sleep(5000);
@@ -121,7 +119,7 @@ public class CredentialPage {
         }
     }
 
-    public void deleteNote(){
+    public void deleteNote() {
         this.deleteCredential.click();
     }
 
@@ -143,7 +141,7 @@ public class CredentialPage {
         return credentialTableUserPassword.getText();
     }
 
-    public void editCredential1(){
+    public void editCredential1() {
         this.editCredential.click();
         try {
             Thread.sleep(3000);
@@ -153,7 +151,7 @@ public class CredentialPage {
 
     }
 
-    public void editCredential2(String editedpassword){
+    public void editCredential2(String editedpassword) {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -172,11 +170,11 @@ public class CredentialPage {
         return this.credentialPassword.getAttribute("value");
     }
 
-    public void clickDeleteCredential(){
+    public void clickDeleteCredential() {
         this.deleteCredential.click();
     }
 
-    public int getCredentialTableSize(){
+    public int getCredentialTableSize() {
         List<WebElement> allRows = credentialTable.findElements(By.xpath("/tbody/tr"));
         return allRows.size();
     }

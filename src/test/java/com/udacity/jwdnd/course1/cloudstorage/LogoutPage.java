@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 public class LogoutPage {
 
 
-
     @FindBy(id = "logout-button")
     private WebElement logputButton;
 

@@ -35,13 +35,13 @@ class CredentialsTest {
 
     @Test
     public void addCredentialsTest() throws InterruptedException {
-        String firstName="Amol";
-        String lastname="Jadhav";
+        String firstName = "Amol";
+        String lastname = "Jadhav";
         String username = "amol";
         String password = "amol1234";
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signupPage = new SignupPage(driver);
-        signupPage.signup(firstName,lastname,username,password);
+        signupPage.signup(firstName, lastname, username, password);
         Assertions.assertEquals("Sign Up", driver.getTitle());
         Thread.sleep(3000);
         LoginPage loginPage = new LoginPage(driver);
@@ -49,33 +49,33 @@ class CredentialsTest {
         Thread.sleep(3000);
         Assertions.assertEquals("Login", driver.getTitle());
         Thread.sleep(3000);
-        loginPage.login(username,password);
+        loginPage.login(username, password);
         Assertions.assertEquals("Home", driver.getTitle());
         Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
         Thread.sleep(3000);
         CredentialPage credentialPage = new CredentialPage(driver);
-        credentialPage.addCredential("www.google.com","amol","amol1234");
+        credentialPage.addCredential("www.google.com", "amol", "amol1234");
         Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
 
         Thread.sleep(3000);
         credentialPage.clickCredentialsTab();
         Thread.sleep(3000);
-        Assertions.assertEquals(credentialPage.getCredentialTableUrl(),"www.google.com");
-        Assertions.assertEquals(credentialPage.getCredentialTableUserName(),"amol");
-        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(),"amol1234");
+        Assertions.assertEquals(credentialPage.getCredentialTableUrl(), "www.google.com");
+        Assertions.assertEquals(credentialPage.getCredentialTableUserName(), "amol");
+        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(), "amol1234");
     }
 
     @Test
     public void editCredentialsTest() throws InterruptedException {
-        String firstName="Amol";
-        String lastname="Jadhav";
+        String firstName = "Amol";
+        String lastname = "Jadhav";
         String username = "amol1";
         String password = "amol1234";
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signupPage = new SignupPage(driver);
-        signupPage.signup(firstName,lastname,username,password);
+        signupPage.signup(firstName, lastname, username, password);
         Assertions.assertEquals("Sign Up", driver.getTitle());
         Thread.sleep(3000);
         LoginPage loginPage = new LoginPage(driver);
@@ -83,45 +83,45 @@ class CredentialsTest {
         Thread.sleep(3000);
         Assertions.assertEquals("Login", driver.getTitle());
         Thread.sleep(3000);
-        loginPage.login(username,password);
+        loginPage.login(username, password);
         Assertions.assertEquals("Home", driver.getTitle());
         Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
         Thread.sleep(3000);
         CredentialPage credentialPage = new CredentialPage(driver);
-        credentialPage.addCredential("www.google.com","amol","amol1234");
+        credentialPage.addCredential("www.google.com", "amol", "amol1234");
         Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
 
         Thread.sleep(3000);
         credentialPage.clickCredentialsTab();
         Thread.sleep(3000);
-        Assertions.assertEquals(credentialPage.getCredentialTableUrl(),"www.google.com");
-        Assertions.assertEquals(credentialPage.getCredentialTableUserName(),"amol");
-        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(),"amol1234");
+        Assertions.assertEquals(credentialPage.getCredentialTableUrl(), "www.google.com");
+        Assertions.assertEquals(credentialPage.getCredentialTableUserName(), "amol");
+        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(), "amol1234");
         credentialPage.editCredential1();
         Thread.sleep(3000);
-        Assertions.assertEquals(credentialPage.getCredentialPassword(),"amol1234");
+        Assertions.assertEquals(credentialPage.getCredentialPassword(), "amol1234");
         credentialPage.editCredential2("56");
         driver.get("http://localhost:" + this.port + "/home");
 
         Thread.sleep(3000);
         credentialPage.clickCredentialsTab();
         Thread.sleep(3000);
-        Assertions.assertEquals(credentialPage.getCredentialTableUrl(),"www.google.com");
-        Assertions.assertEquals(credentialPage.getCredentialTableUserName(),"amol");
-        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(),"amol123456");
+        Assertions.assertEquals(credentialPage.getCredentialTableUrl(), "www.google.com");
+        Assertions.assertEquals(credentialPage.getCredentialTableUserName(), "amol");
+        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(), "amol123456");
     }
 
     @Test
     public void deleteCredentialsTest() throws InterruptedException {
-        String firstName="Amol";
-        String lastname="Jadhav";
+        String firstName = "Amol";
+        String lastname = "Jadhav";
         String username = "amol2";
         String password = "amol1234";
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signupPage = new SignupPage(driver);
-        signupPage.signup(firstName,lastname,username,password);
+        signupPage.signup(firstName, lastname, username, password);
         Assertions.assertEquals("Sign Up", driver.getTitle());
         Thread.sleep(3000);
         LoginPage loginPage = new LoginPage(driver);
@@ -129,29 +129,29 @@ class CredentialsTest {
         Thread.sleep(3000);
         Assertions.assertEquals("Login", driver.getTitle());
         Thread.sleep(3000);
-        loginPage.login(username,password);
+        loginPage.login(username, password);
         Assertions.assertEquals("Home", driver.getTitle());
         Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
         Thread.sleep(3000);
         CredentialPage credentialPage = new CredentialPage(driver);
-        credentialPage.addCredential("www.google.com","amol","amol1234");
+        credentialPage.addCredential("www.google.com", "amol", "amol1234");
         Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
 
         Thread.sleep(3000);
         credentialPage.clickCredentialsTab();
         Thread.sleep(3000);
-        Assertions.assertEquals(credentialPage.getCredentialTableUrl(),"www.google.com");
-        Assertions.assertEquals(credentialPage.getCredentialTableUserName(),"amol");
-        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(),"amol1234");
+        Assertions.assertEquals(credentialPage.getCredentialTableUrl(), "www.google.com");
+        Assertions.assertEquals(credentialPage.getCredentialTableUserName(), "amol");
+        Assertions.assertNotEquals(credentialPage.getCredentialTableUserPassword(), "amol1234");
         credentialPage.clickDeleteCredential();
         Thread.sleep(2000);
         driver.get("http://localhost:" + this.port + "/home");
         Thread.sleep(1000);
         credentialPage.clickCredentialsTab();
         Thread.sleep(3000);
-        Assertions.assertEquals(credentialPage.getCredentialTableSize(),0);
+        Assertions.assertEquals(credentialPage.getCredentialTableSize(), 0);
     }
 
 }
