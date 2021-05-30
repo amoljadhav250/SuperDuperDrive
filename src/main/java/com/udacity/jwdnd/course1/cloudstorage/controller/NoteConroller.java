@@ -28,25 +28,25 @@ public class NoteConroller {
     }
 
     @PostMapping("add-note")
-    public String addNote(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model){
+    public String addNote(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) {
         String username = authentication.getName();
-        User user=userService.getUser(username);
-        Integer userId=user.getUserid();
-        System.out.println("noteForm.getNotetitle():= "+noteForm.getNotetitle());
-        System.out.println("noteForm.getNotedescription():= "+noteForm.getNotedescription());
-        Integer noteId=noteForm.getNoteid();
-        String title=noteForm.getNotetitle();
-        String desc=noteForm.getNotedescription();
-        if(noteService.getNote(noteId)==null){
-            Note newNote = new Note( noteId,  title,  desc,  userId);
+        User user = userService.getUser(username);
+        Integer userId = user.getUserid();
+        System.out.println("noteForm.getNotetitle():= " + noteForm.getNotetitle());
+        System.out.println("noteForm.getNotedescription():= " + noteForm.getNotedescription());
+        Integer noteId = noteForm.getNoteid();
+        String title = noteForm.getNotetitle();
+        String desc = noteForm.getNotedescription();
+        if (noteService.getNote(noteId) == null) {
+            Note newNote = new Note(noteId, title, desc, userId);
             noteService.addNote(newNote);
-        }else{
-            noteService.updateNote(noteId,title,desc);
+        } else {
+            noteService.updateNote(noteId, title, desc);
         }
 
-        model.addAttribute("result",true);
-        model.addAttribute("notes",noteService.getNoteListings(userId));
-        System.out.println("noteService.getNoteListings(userId):="+noteService.getNoteListings(userId));
+        model.addAttribute("result", true);
+        model.addAttribute("notes", noteService.getNoteListings(userId));
+        System.out.println("noteService.getNoteListings(userId):=" + noteService.getNoteListings(userId));
 
         return "result";
     }
@@ -57,7 +57,7 @@ public class NoteConroller {
     }
 
     @GetMapping(value = "/delete-note/{noteId}")
-    public String deleteNote(@PathVariable Integer noteId, Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model){
+    public String deleteNote(@PathVariable Integer noteId, Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) {
         noteService.deleteNote(noteId);
         Integer userId = getUserId(authentication);
         model.addAttribute("notes", noteService.getNoteListings(userId));

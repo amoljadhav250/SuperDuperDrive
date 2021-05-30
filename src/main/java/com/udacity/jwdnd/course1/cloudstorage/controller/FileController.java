@@ -29,32 +29,32 @@ public class FileController {
     @PostMapping("upload-file")
     public String uploadFile(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) throws IOException {
         String username = authentication.getName();
-        User user=userService.getUser(username);
-        Integer userId=user.getUserid();
+        User user = userService.getUser(username);
+        Integer userId = user.getUserid();
         MultipartFile file = fileForm.getFile();
         String fileName = file.getOriginalFilename();
         String[] files = fileService.getFileListings(userId);
-        boolean flag=false;
+        boolean flag = false;
         System.out.println(files);
-        for(int i=0;i<files.length;i++){
-            if(files[i].equals(fileName)){
-                flag=true;
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].equals(fileName)) {
+                flag = true;
                 break;
             }
         }
-        if(flag==true){
-            model.addAttribute("message","You have tried to add file with same name");
-            model.addAttribute("result",false);
+        if (flag == true) {
+            model.addAttribute("message", "You have tried to add file with same name");
+            model.addAttribute("result", false);
             return "result";
         }
-        if(fileName.equals("") || fileName==null){
-            model.addAttribute("message","not saved");
-            model.addAttribute("result",false);
+        if (fileName.equals("") || fileName == null) {
+            model.addAttribute("message", "not saved");
+            model.addAttribute("result", false);
             return "result";
         }
         fileService.addFile(file, username);
-        model.addAttribute("files",fileService.getFileListings(userId));
-        model.addAttribute("result",true);
+        model.addAttribute("files", fileService.getFileListings(userId));
+        model.addAttribute("result", true);
         return "result";
     }
 
@@ -65,7 +65,7 @@ public class FileController {
     }
 
     @GetMapping(value = "/delete-file/{filename}")
-    public String deleteFile(@PathVariable String filename, Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model){
+    public String deleteFile(@PathVariable String filename, Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) {
         fileService.deleteFile(filename);
         Integer userId = getUserId(authentication);
         model.addAttribute("notes", fileService.getFileListings(userId));
@@ -74,7 +74,7 @@ public class FileController {
     }
 
     @GetMapping(value = "/get-file/{filename}")
-    public String getFile(@PathVariable String filename, Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model){
+    public String getFile(@PathVariable String filename, Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) {
         fileService.getFile(filename);
         Integer userId = getUserId(authentication);
         model.addAttribute("notes", fileService.getFileListings(userId));

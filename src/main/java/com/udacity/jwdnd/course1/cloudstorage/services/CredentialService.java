@@ -29,12 +29,12 @@ public class CredentialService {
     }
 
     public Credential getCredential(Integer credentialId) {
-        System.out.println("credentialId:- "+credentialId);
+        System.out.println("credentialId:- " + credentialId);
         Credential temp = credentialMapper.getCredential(credentialId);
-        if(temp != null){
+        if (temp != null) {
             String tempPassword = encryptionService.decryptValue(temp.getPassword(), temp.getKey());
             temp.setPassword(tempPassword);
-            System.out.println("temp.getCredentialid():-"+temp.getCredentialid());
+            System.out.println("temp.getCredentialid():-" + temp.getCredentialid());
         }
 
         return temp;

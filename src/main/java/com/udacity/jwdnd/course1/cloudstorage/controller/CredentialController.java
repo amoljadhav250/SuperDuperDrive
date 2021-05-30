@@ -54,7 +54,7 @@ public class CredentialController {
 
         model.addAttribute("result",true);
         model.addAttribute("credentials",credentialService.getCredentialListings(userId));
-        model.addAttribute("encryptionService",encryptionService);
+        model.addAttribute("encryptionService", encryptionService);
         return "result";
     }
 

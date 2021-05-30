@@ -33,14 +33,14 @@ public class UserService {
 
     public boolean isUsernameAvailable(String username) {
         User vUser = userMapper.getUser(username);
-        if(vUser == null){
+        if (vUser == null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userMapper.getAllUsers();
     }
 

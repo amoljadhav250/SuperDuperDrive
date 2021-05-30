@@ -30,15 +30,15 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getHome(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model){
+    public String getHome(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) {
         String username = authentication.getName();
-        User user=userService.getUser(username);
-        Integer userId=user.getUserid();
-        model.addAttribute("notes",noteService.getNoteListings(userId));
-        System.out.println("noteService.getNoteListings(userId):="+noteService.getNoteListings(userId));
-        model.addAttribute("credentials",credentialService.getCredentialListings(userId));
-        model.addAttribute("files",fileService.getFileListings(userId));
-        model.addAttribute("encryptionService",encryptionService);
+        User user = userService.getUser(username);
+        Integer userId = user.getUserid();
+        model.addAttribute("notes", noteService.getNoteListings(userId));
+        System.out.println("noteService.getNoteListings(userId):=" + noteService.getNoteListings(userId));
+        model.addAttribute("credentials", credentialService.getCredentialListings(userId));
+        model.addAttribute("files", fileService.getFileListings(userId));
+        model.addAttribute("encryptionService", encryptionService);
         return "home";
     }
 

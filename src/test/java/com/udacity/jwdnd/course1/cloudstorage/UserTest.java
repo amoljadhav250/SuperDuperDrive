@@ -47,19 +47,19 @@ class UserTest {
 
     @Test
     public void signupTest() throws InterruptedException {
-        String firstName="Amol";
-        String lastname="Jadhav";
+        String firstName = "Amol";
+        String lastname = "Jadhav";
         String username = "amol";
         String password = "amol1234";
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signupPage = new SignupPage(driver);
-        signupPage.signup(firstName,lastname,username,password);
+        signupPage.signup(firstName, lastname, username, password);
         Assertions.assertEquals("Sign Up", driver.getTitle());
         Thread.sleep(1000);
         LoginPage loginPage = new LoginPage(driver);
         driver.get("http://localhost:" + this.port + "/login");
         Assertions.assertEquals("Login", driver.getTitle());
-        loginPage.login(username,password);
+        loginPage.login(username, password);
         Assertions.assertEquals("Home", driver.getTitle());
         Thread.sleep(1000);
         LogoutPage logoutPage = new LogoutPage(driver);

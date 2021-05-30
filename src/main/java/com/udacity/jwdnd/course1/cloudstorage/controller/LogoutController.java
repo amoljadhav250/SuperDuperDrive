@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LogoutController {
 
     @PostMapping("logout")
-    public String logoutView(Model model){
-        model.addAttribute("loggedOut",true);
+    public String logoutView(Model model) {
+        model.addAttribute("loggedOut", true);
         return "redirect:/login?logout";
     }
 

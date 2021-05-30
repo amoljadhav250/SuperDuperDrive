@@ -29,7 +29,7 @@ public class NoteService {
     }
 
     public void addNote(Note note) {
-         noteMapper.insert(note);
+        noteMapper.insert(note);
     }
 
     public Note[] getNoteListings(Integer userId) {
