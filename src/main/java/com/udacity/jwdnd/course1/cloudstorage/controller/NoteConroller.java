@@ -51,13 +51,13 @@ public class NoteConroller {
             Note newNote = new Note(noteId, title, desc, userId);
             noteService.addNote(newNote);
         } else {
-            if(noteService.getNotByTitle(title, userId) != null){
-                model.addAttribute("result", "warn");
-                model.addAttribute("message", "Note is not saved, because note with similar title exists already. ");
-                return "result";
-            }else{
+           // if(noteService.getNotByTitle(title, userId) != null){
+           //     model.addAttribute("result", "warn");
+           //     model.addAttribute("message", "Note is not saved, because note with similar title exists already. ");
+           //     return "result";
+           // }else{
                 noteService.updateNote(noteId, title, desc);
-            }
+            //}
 
         }
 

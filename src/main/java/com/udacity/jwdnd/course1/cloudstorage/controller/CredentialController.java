@@ -45,10 +45,22 @@ public class CredentialController {
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
         String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
+        if (credentialService.getCredentialByUsername(userId, username) != null && credentialService.getCredential(credentialid) == null) {
+            model.addAttribute("result", "warn");
+            model.addAttribute("message", "User already available.");
+            return "result";
+        }
         if (credentialService.getCredential(credentialid) == null) {
             credentialService.addCredential(url, authentication.getName(), username, encodedKey, encryptedPassword);
         } else {
+            // if (credentialService.getCredentialByUsername(userId, username) != null) {
+            //     model.addAttribute("result", "warn");
+            //    model.addAttribute("message", "User already available.");
+            //     return "result";
+            //} else {
             credentialService.updateCredential(credentialid, username, url, encodedKey, encryptedPassword);
+            //}
+
         }
 
         model.addAttribute("result", "success");

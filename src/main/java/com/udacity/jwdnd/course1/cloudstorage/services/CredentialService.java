@@ -47,4 +47,8 @@ public class CredentialService {
     public void updateCredential(Integer credentialId, String newUserName, String url, String key, String password) {
         credentialMapper.updateCredential(credentialId, newUserName, url, key, password);
     }
+
+    public Credential getCredentialByUsername(Integer userid, String username){
+        return credentialMapper.getCredentialByUsername(userid, username);
+    }
 }
