@@ -37,6 +37,12 @@ public class NoteConroller {
         Integer noteId = noteForm.getNoteid();
         String title = noteForm.getNotetitle();
         String desc = noteForm.getNotedescription();
+        System.out.println("desc.length():="+desc.length());
+        if(desc.length()>1000){
+            model.addAttribute("result", false);
+            model.addAttribute("message", "Note description length is 1000 characters");
+            return "result";
+        }
         if (noteService.getNote(noteId) == null) {
             Note newNote = new Note(noteId, title, desc, userId);
             noteService.addNote(newNote);
@@ -46,7 +52,7 @@ public class NoteConroller {
 
         model.addAttribute("result", true);
         model.addAttribute("notes", noteService.getNoteListings(userId));
-        System.out.println("noteService.getNoteListings(userId):=" + noteService.getNoteListings(userId));
+       // System.out.println("noteService.getNoteListings(userId):=" + noteService.getNoteListings(userId));
 
         return "result";
     }

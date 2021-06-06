@@ -35,7 +35,7 @@ public class FileController {
         String fileName = file.getOriginalFilename();
         String[] files = fileService.getFileListings(userId);
         boolean flag = false;
-        System.out.println(files);
+        //System.out.println(files);
         for (int i = 0; i < files.length; i++) {
             if (files[i].equals(fileName)) {
                 flag = true;

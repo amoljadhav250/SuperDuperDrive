@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller()
 @RequestMapping("/signup")
@@ -22,25 +23,23 @@ public class SignupController {
 
     @GetMapping()
     public String signupView(@ModelAttribute User user, Model model) {
-
-        System.out.println(userService.getAllUsers());
+        //System.out.println(userService.getAllUsers());
         return "signup";
     }
 
     @PostMapping()
     public String signupUser(@ModelAttribute User user, Model model) {
-        System.out.println(userService.getAllUsers());
+       /* System.out.println(userService.getAllUsers());
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
         System.out.println(user.getFirstname());
-        System.out.println(user.getLastname());
-        System.out.println(user);
-
+        System.out.println(user.getLastname());*/
+     //   System.out.println(user);
         String signupError = null;
 
         if (!userService.isUsernameAvailable(user.getUsername())) {
             signupError = "The username already exists.";
-            System.out.println(signupError);
+         //   System.out.println(signupError);
         }
 
         if (signupError == null) {
@@ -51,11 +50,13 @@ public class SignupController {
         }
 
         if (signupError == null) {
-            model.addAttribute("signupSuccess", true);
+            System.out.println("Redirecting to login page after successful registration");
+            return "redirect:/login?signupSuccess";
         } else {
             model.addAttribute("signupError", signupError);
+            return "signup";
         }
 
-        return "signup";
     }
+
 }

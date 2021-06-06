@@ -28,32 +28,31 @@ public class CredentialController {
     }
 
     @PostMapping("add-cerential")
-    public String addCrential(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model){
+    public String addCrential(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) {
 
         String username = authentication.getName();
-        User user=userService.getUser(username);
-        Integer userId=user.getUserid();
-        System.out.println("credentialForm.getUrl():= "+credentialForm.getUrl());
-        System.out.println("credentialForm.getUsername():= "+credentialForm.getUsername());
-        Integer credentialid=credentialForm.getCredentialid();
+        User user = userService.getUser(username);
+        Integer userId = user.getUserid();
+        //System.out.println("credentialForm.getUrl():= "+credentialForm.getUrl());
+        //System.out.println("credentialForm.getUsername():= "+credentialForm.getUsername());
+        Integer credentialid = credentialForm.getCredentialid();
         username = credentialForm.getUsername();
-        String url=credentialForm.getUrl();
-        String password=credentialForm.getPassword();
+        String url = credentialForm.getUrl();
+        String password = credentialForm.getPassword();
 
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
         String encryptedPassword = encryptionService.encryptValue(password, encodedKey);
-
-        if(credentialService.getCredential(credentialid)==null){
-            credentialService.addCredential(url,authentication.getName(),username,encodedKey,encryptedPassword);
-        }else{
-            credentialService.updateCredential(credentialid,username,url,encodedKey,encryptedPassword);
+        if (credentialService.getCredential(credentialid) == null) {
+            credentialService.addCredential(url, authentication.getName(), username, encodedKey, encryptedPassword);
+        } else {
+            credentialService.updateCredential(credentialid, username, url, encodedKey, encryptedPassword);
         }
 
-        model.addAttribute("result",true);
-        model.addAttribute("credentials",credentialService.getCredentialListings(userId));
+        model.addAttribute("result", true);
+        model.addAttribute("credentials", credentialService.getCredentialListings(userId));
         model.addAttribute("encryptionService", encryptionService);
         return "result";
     }
@@ -65,14 +64,14 @@ public class CredentialController {
     }
 
     @GetMapping(value = "/get-credential/{credentialId}")
-    public Credential getCredential(@PathVariable Integer credentialId,Model model) {
-        model.addAttribute("encryptionService",encryptionService);
+    public Credential getCredential(@PathVariable Integer credentialId, Model model) {
+        model.addAttribute("encryptionService", encryptionService);
         return credentialService.getCredential(credentialId);
     }
 
     @GetMapping
-    public String getHome(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model){
-        model.addAttribute("encryptionService",encryptionService);
+    public String getHome(Authentication authentication, FileForm fileForm, CredentialForm credentialForm, NoteForm noteForm, Model model) {
+        model.addAttribute("encryptionService", encryptionService);
         return "home";
     }
 
@@ -82,7 +81,7 @@ public class CredentialController {
         Integer userId = getUserId(authentication);
         model.addAttribute("notes", credentialService.getCredentialListings(userId));
         model.addAttribute("result", "success");
-        model.addAttribute("encryptionService",encryptionService);
+        model.addAttribute("encryptionService", encryptionService);
         return "result";
     }
 }
