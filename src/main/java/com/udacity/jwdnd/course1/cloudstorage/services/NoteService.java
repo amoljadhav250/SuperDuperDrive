@@ -47,4 +47,8 @@ public class NoteService {
     public void updateNote(Integer noteId, String title, String description) {
         noteMapper.updateNote(noteId, title, description);
     }
+
+    public Note getNotByTitle(String title, Integer userId){
+        return noteMapper.getNoteByTitle(title,userId);
+    }
 }

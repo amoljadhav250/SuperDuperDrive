@@ -37,22 +37,33 @@ public class NoteConroller {
         Integer noteId = noteForm.getNoteid();
         String title = noteForm.getNotetitle();
         String desc = noteForm.getNotedescription();
-        System.out.println("desc.length():="+desc.length());
-        if(desc.length()>1000){
-            model.addAttribute("result", false);
-            model.addAttribute("message", "Note description length is 1000 characters");
+        System.out.println("desc.length():=" + desc.length());
+        if (desc.length() > 1000) {
+            model.addAttribute("result", "error");
+            model.addAttribute("message", "Note is not saved, because note description length is more than maximum permissible limit of 1000 characters. ");
             return "result";
         }
-        if (noteService.getNote(noteId) == null) {
+        if (noteService.getNotByTitle(title, userId) != null && noteService.getNote(noteId)==null) {
+            model.addAttribute("result", "warn");
+            model.addAttribute("message", "Note is not saved, because note with similar title exists already. ");
+            return "result";
+        } else if (noteService.getNote(noteId) == null) {
             Note newNote = new Note(noteId, title, desc, userId);
             noteService.addNote(newNote);
         } else {
-            noteService.updateNote(noteId, title, desc);
+            if(noteService.getNotByTitle(title, userId) != null){
+                model.addAttribute("result", "warn");
+                model.addAttribute("message", "Note is not saved, because note with similar title exists already. ");
+                return "result";
+            }else{
+                noteService.updateNote(noteId, title, desc);
+            }
+
         }
 
-        model.addAttribute("result", true);
+        model.addAttribute("result", "success");
         model.addAttribute("notes", noteService.getNoteListings(userId));
-       // System.out.println("noteService.getNoteListings(userId):=" + noteService.getNoteListings(userId));
+        // System.out.println("noteService.getNoteListings(userId):=" + noteService.getNoteListings(userId));
 
         return "result";
     }

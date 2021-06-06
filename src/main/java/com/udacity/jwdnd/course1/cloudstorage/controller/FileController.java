@@ -43,18 +43,18 @@ public class FileController {
             }
         }
         if (flag == true) {
-            model.addAttribute("message", "You have tried to add file with same name");
-            model.addAttribute("result", false);
+            model.addAttribute("message", "You have tried to add file with same name. ");
+            model.addAttribute("result", "error");
             return "result";
         }
         if (fileName.equals("") || fileName == null) {
-            model.addAttribute("message", "not saved");
-            model.addAttribute("result", false);
+            model.addAttribute("result", "warn");
+            model.addAttribute("message", "File was not selected. So changes are not saved. ");
             return "result";
         }
         fileService.addFile(file, username);
         model.addAttribute("files", fileService.getFileListings(userId));
-        model.addAttribute("result", true);
+        model.addAttribute("result", "success");
         return "result";
     }
 

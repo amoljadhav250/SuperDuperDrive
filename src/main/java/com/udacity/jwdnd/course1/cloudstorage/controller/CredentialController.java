@@ -51,7 +51,7 @@ public class CredentialController {
             credentialService.updateCredential(credentialid, username, url, encodedKey, encryptedPassword);
         }
 
-        model.addAttribute("result", true);
+        model.addAttribute("result", "success");
         model.addAttribute("credentials", credentialService.getCredentialListings(userId));
         model.addAttribute("encryptionService", encryptionService);
         return "result";
