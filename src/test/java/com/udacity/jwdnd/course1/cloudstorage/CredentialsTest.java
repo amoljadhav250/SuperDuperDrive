@@ -42,7 +42,7 @@ class CredentialsTest {
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signupPage = new SignupPage(driver);
         signupPage.signup(firstName, lastname, username, password);
-        Assertions.assertEquals("Sign Up", driver.getTitle());
+        Assertions.assertEquals("Login", driver.getTitle());
         Thread.sleep(3000);
         LoginPage loginPage = new LoginPage(driver);
         driver.get("http://localhost:" + this.port + "/login");
@@ -76,7 +76,7 @@ class CredentialsTest {
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signupPage = new SignupPage(driver);
         signupPage.signup(firstName, lastname, username, password);
-        Assertions.assertEquals("Sign Up", driver.getTitle());
+        Assertions.assertEquals("Login", driver.getTitle());
         Thread.sleep(3000);
         LoginPage loginPage = new LoginPage(driver);
         driver.get("http://localhost:" + this.port + "/login");
@@ -122,7 +122,7 @@ class CredentialsTest {
         driver.get("http://localhost:" + this.port + "/signup");
         SignupPage signupPage = new SignupPage(driver);
         signupPage.signup(firstName, lastname, username, password);
-        Assertions.assertEquals("Sign Up", driver.getTitle());
+        Assertions.assertEquals("Login", driver.getTitle());
         Thread.sleep(3000);
         LoginPage loginPage = new LoginPage(driver);
         driver.get("http://localhost:" + this.port + "/login");
