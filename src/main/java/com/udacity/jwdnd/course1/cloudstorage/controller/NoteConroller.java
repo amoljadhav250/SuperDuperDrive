@@ -43,21 +43,22 @@ public class NoteConroller {
             model.addAttribute("message", "Note is not saved, because note description length is more than maximum permissible limit of 1000 characters. ");
             return "result";
         }
-        if (noteService.getNotByTitle(title, userId) != null && noteService.getNote(noteId)==null) {
+        if (noteService.getNotByTitle(title, userId) != null && noteService.getNote(noteId) == null) {
             model.addAttribute("result", "warn");
             model.addAttribute("message", "Note is not saved, because note with similar title exists already. ");
             return "result";
         } else if (noteService.getNote(noteId) == null) {
             Note newNote = new Note(noteId, title, desc, userId);
             noteService.addNote(newNote);
-        } else {
-           // if(noteService.getNotByTitle(title, userId) != null){
-           //     model.addAttribute("result", "warn");
-           //     model.addAttribute("message", "Note is not saved, because note with similar title exists already. ");
-           //     return "result";
-           // }else{
+        } else if (noteService.getNote(noteId) != null) {
+            if (noteService.getNotByTitle(title, userId).getNoteid() == noteId) {
+
                 noteService.updateNote(noteId, title, desc);
-            //}
+            } else {
+                model.addAttribute("result", "warn");
+                model.addAttribute("message", "Note is not saved, because note with similar title exists already. ");
+                return "result";
+            }
 
         }
 

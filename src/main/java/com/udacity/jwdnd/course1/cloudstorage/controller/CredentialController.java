@@ -40,6 +40,7 @@ public class CredentialController {
         String url = credentialForm.getUrl();
         String password = credentialForm.getPassword();
 
+
         SecureRandom random = new SecureRandom();
         byte[] key = new byte[16];
         random.nextBytes(key);
@@ -49,17 +50,17 @@ public class CredentialController {
             model.addAttribute("result", "warn");
             model.addAttribute("message", "User already available.");
             return "result";
-        }
-        if (credentialService.getCredential(credentialid) == null) {
+        } else if (credentialService.getCredential(credentialid) == null) {
             credentialService.addCredential(url, authentication.getName(), username, encodedKey, encryptedPassword);
-        } else {
-            // if (credentialService.getCredentialByUsername(userId, username) != null) {
-            //     model.addAttribute("result", "warn");
-            //    model.addAttribute("message", "User already available.");
-            //     return "result";
-            //} else {
-            credentialService.updateCredential(credentialid, username, url, encodedKey, encryptedPassword);
-            //}
+        } else if ((credentialService.getCredential(credentialid) != null)) {
+            if (credentialService.getCredentialByUsername(userId, username).getCredentialid() == credentialid) {
+                credentialService.updateCredential(credentialid, username, url, encodedKey, encryptedPassword);
+            } else {
+
+                model.addAttribute("result", "warn");
+                model.addAttribute("message", "User already available.");
+                return "result";
+            }
 
         }
 
