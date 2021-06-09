@@ -40,7 +40,7 @@ public class NoteConroller {
         System.out.println("desc.length():=" + desc.length());
         if (desc.length() > 1000) {
             model.addAttribute("result", "error");
-            model.addAttribute("message", "Note is not saved, because note description length is more than maximum permissible limit of 1000 characters. ");
+            model.addAttribute("message", "Note can't be saved as description exceed 1000 characters. ");
             return "result";
         }
         if (noteService.getNotByTitle(title, userId) != null && noteService.getNote(noteId) == null) {

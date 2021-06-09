@@ -43,22 +43,22 @@ class NoteTest {
         SignupPage signupPage = new SignupPage(driver);
         signupPage.signup(firstName, lastname, username, password);
         Assertions.assertEquals("Login", driver.getTitle());
-        Thread.sleep(1000);
+        //Thread.sleep(10000);
         LoginPage loginPage = new LoginPage(driver);
         driver.get("http://localhost:" + this.port + "/login");
         Assertions.assertEquals("Login", driver.getTitle());
         loginPage.login(username, password);
         Assertions.assertEquals("Home", driver.getTitle());
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         driver.get("http://localhost:" + this.port + "/home");
         NotePage notePage = new NotePage(driver);
         notePage.addNote("First Note", "This if my first Note");
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
 
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         notePage.clickNotesTab();
-        Thread.sleep(5000);
+        //Thread.sleep(1000);
         System.out.println("notePage.getTitle():-" + notePage.getTitle());
         System.out.println("notePage.getNoteDesc():-" + notePage.getNoteDesc());
         Assertions.assertEquals("First Note", notePage.getTitle());
@@ -75,33 +75,33 @@ class NoteTest {
         SignupPage signupPage = new SignupPage(driver);
         signupPage.signup(firstName, lastname, username, password);
         Assertions.assertEquals("Login", driver.getTitle());
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         LoginPage loginPage = new LoginPage(driver);
         driver.get("http://localhost:" + this.port + "/login");
         Assertions.assertEquals("Login", driver.getTitle());
         loginPage.login(username, password);
         Assertions.assertEquals("Home", driver.getTitle());
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         driver.get("http://localhost:" + this.port + "/home");
         NotePage notePage = new NotePage(driver);
         notePage.addNote("First Note", "This if my first Note");
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
 
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
 
         notePage.clickNotesTab();
-        Thread.sleep(3000);
+        //Thread.sleep(5000);
         Assertions.assertEquals("First Note", notePage.getTitle());
         Assertions.assertEquals("This if my first Note", notePage.getNoteDesc());
         System.out.println("notePage.getTitle() 2 :-" + notePage.getTitle());
         System.out.println("notePage.getNoteDesc() 2 :-" + notePage.getNoteDesc());
-        Thread.sleep(5000);
-        notePage.editNote(" updated");
+        //Thread.sleep(5000);
+        notePage.editNote("This if my first Note updated");
         driver.get("http://localhost:" + this.port + "/home");
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         notePage.clickNotesTab();
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         System.out.println("notePage.getTitle():-" + notePage.getTitle());
         System.out.println("notePage.getNoteDesc():-" + notePage.getNoteDesc());
         Assertions.assertEquals("First Note", notePage.getTitle());
@@ -118,36 +118,36 @@ class NoteTest {
         SignupPage signupPage = new SignupPage(driver);
         signupPage.signup(firstName, lastname, username, password);
         Assertions.assertEquals("Login", driver.getTitle());
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         LoginPage loginPage = new LoginPage(driver);
         driver.get("http://localhost:" + this.port + "/login");
         Assertions.assertEquals("Login", driver.getTitle());
         loginPage.login(username, password);
         Assertions.assertEquals("Home", driver.getTitle());
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         driver.get("http://localhost:" + this.port + "/home");
         NotePage notePage = new NotePage(driver);
         notePage.addNote("First Note", "This if my first Note");
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
         driver.get("http://localhost:" + this.port + "/home");
 
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
 
         notePage.clickNotesTab();
-        Thread.sleep(3000);
+        //Thread.sleep(1000);
         Assertions.assertEquals("First Note", notePage.getTitle());
         Assertions.assertEquals("This if my first Note", notePage.getNoteDesc());
         System.out.println("notePage.getTitle() 2 :-" + notePage.getTitle());
         System.out.println("notePage.getNoteDesc() 2 :-" + notePage.getNoteDesc());
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         notePage.deleteNote();
-        Thread.sleep(5000);
+       // Thread.sleep(5000);
         driver.get("http://localhost:" + this.port + "/home");
 
-        Thread.sleep(3000);
+        //Thread.sleep(3000);
 
         notePage.clickNotesTab();
-        Thread.sleep(3000);
+        //Thread.sleep(1000);
         Assertions.assertEquals(0, notePage.getNoteTableSize());
     }
 

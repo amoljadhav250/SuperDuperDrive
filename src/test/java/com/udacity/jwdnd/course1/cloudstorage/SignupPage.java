@@ -23,16 +23,23 @@ public class SignupPage {
     @FindBy(id = "submit-button")
     private WebElement submitButton;
 
+    private final WebDriver driver;
 
-    public SignupPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public SignupPage(WebDriver webDriver) {
+        this.driver=webDriver;
+        PageFactory.initElements(webDriver, this);
     }
 
     public void signup(String firstName, String lastName, String username, String password) {
-        this.inputFirstName.sendKeys(firstName);
+        /*this.inputFirstName.sendKeys(firstName);
         this.inputLastName.sendKeys(lastName);
         this.inputUserName.sendKeys(username);
         this.inputPassword.sendKeys(password);
-        this.submitButton.click();
+        this.submitButton.click();*/
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + firstName + "';", inputFirstName);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + lastName + "';", inputLastName);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + username + "';", inputUserName);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + password + "';", inputPassword);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitButton);
     }
 }

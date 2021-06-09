@@ -12,7 +12,6 @@ import java.util.List;
 public class NotePage {
 
 
-
     @FindBy(id = "nav-notes-tab")
     private WebElement notesTab;
 
@@ -20,10 +19,10 @@ public class NotePage {
     private WebElement addNewNote;
 
     @FindBy(id = "note-title")
-    private WebElement noteTitle;
+    private WebElement noteTitleEl;
 
     @FindBy(id = "note-description")
-    private WebElement noteDescription;
+    private WebElement noteDescriptionEl;
 
     @FindBy(id = "noteSubmit2")
     private WebElement noteSubmitButton;
@@ -43,87 +42,107 @@ public class NotePage {
     @FindBy(id = "userTable")
     private WebElement noteTable;
 
-    public NotePage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    private final WebDriver driver;
+
+    public NotePage(WebDriver webDriver) {
+        this.driver = webDriver;
+        PageFactory.initElements(webDriver, this);
     }
 
-    public void addNote(String noteTitle, String noteDescription)   {
-        this.notesTab.click();
-        try {
+    public void addNote(String noteTitle, String noteDescription) {
+        //this.notesTab.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", notesTab);
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        this.addNewNote.click();
-        try {
+        }*/
+        //this.addNewNote.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addNewNote);
+        /*try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        //this.noteTitle.sendKeys(noteTitle);
+        // this.noteDescription.sendKeys(noteDescription);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + noteTitle + "';", this.noteTitleEl);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + noteDescription + "';", this.noteDescriptionEl);
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        this.noteTitle.sendKeys(noteTitle);
-        this.noteDescription.sendKeys(noteDescription);
-        try {
+        }*/
+        //this.noteSubmitButton.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", noteSubmitButton);
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        this.noteSubmitButton.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-      //  this.notesTab.click();
+        }*/
+        //  this.notesTab.click();
     }
 
-    public void clickNotesTab(){
-        this.notesTab.click();
+    public void clickNotesTab() {
+        //this.notesTab.click();
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", notesTab);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getTitle(){
+    public String getTitle() {
+        //return this.noteTitleDisplay.getAttribute("innerHTML");
         return this.noteTitleDisplay.getText();
     }
 
-    public String getNoteDesc(){
+    public String getNoteDesc() {
+        //return this.noteDescDisplay.getAttribute("innerHTML");
         return this.noteDescDisplay.getText();
     }
 
-    public void editNote(String updatedNoteDesc){
+    public void editNote(String updatedNoteDesc) {
         System.out.println("Clicking Edit Button");
+       /* try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        //this.editNoteButton.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", editNoteButton);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        this.editNoteButton.click();
-        try {
+        //this.noteDescription.sendKeys(updatedNoteDesc);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + updatedNoteDesc + "';", noteDescriptionEl);
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        this.noteDescription.sendKeys(updatedNoteDesc);
-        try {
+        }*/
+        //this.noteSubmitButton.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", noteSubmitButton);
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        this.noteSubmitButton.click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        }*/
     }
 
-    public void deleteNote(){
-        this.deleteNoteButton.click();
+    public void deleteNote() {
+        //this.deleteNoteButton.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteNoteButton);
     }
 
-    public int getNoteTableSize(){
+    public int getNoteTableSize() {
         List<WebElement> allRows = noteTable.findElements(By.xpath("/tbody/tr"));
         return allRows.size();
     }
-
 
 
 }
