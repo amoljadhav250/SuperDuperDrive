@@ -49,74 +49,92 @@ public class CredentialPage {
     @FindBy(id = "credentialTable")
     private WebElement credentialTable;
 
-    public CredentialPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    private final WebDriver driver;
+
+    public CredentialPage(WebDriver webDriver) {
+        this.driver=webDriver;
+        PageFactory.initElements(webDriver, this);
     }
 
     public void addCredential(String url, String username, String password) {
-        this.credentialsTab.click();
+        //this.credentialsTab.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.credentialsTab);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        this.addCredentialButton.click();
+        //this.addCredentialButton.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.addCredentialButton);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        this.credentialUrl.sendKeys(url);
-        this.credentialUserName.sendKeys(username);
-        this.credentialPassword.sendKeys(password);
-        try {
+        //this.credentialUrl.sendKeys(url);
+        //this.credentialUserName.sendKeys(username);
+        //this.credentialPassword.sendKeys(password);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + url + "';", this.credentialUrl);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + username + "';", this.credentialUserName);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + password + "';", this.credentialPassword);
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        this.saveCredential.click();
-        try {
+        }*/
+        //this.saveCredential.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.saveCredential);
+        /*try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         //  this.notesTab.click();
     }
 
     public void clickCredentialsTab() {
-        this.credentialsTab.click();
+        //this.credentialsTab.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.credentialsTab);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getTablePassword() {
-        return this.credentialTableUserPassword.getText();
+        //return this.credentialTableUserPassword.getText();
+        return this.credentialTableUserPassword.getAttribute("innerHTML");
     }
 
 
     public void editNote(String updatedPassword) {
         System.out.println("Clicking Edit Button");
-        try {
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        this.editCredential.click();
+        }*/
+        //this.editCredential.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.editCredential);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        this.credentialPassword.sendKeys(updatedPassword);
-        try {
+        //this.credentialPassword.sendKeys(updatedPassword);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + updatedPassword + "';", this.credentialPassword);
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         this.saveCredential.click();
-        try {
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void deleteNote() {
@@ -130,21 +148,24 @@ public class CredentialPage {
 */
 
     public String getCredentialTableUrl() {
-        return credentialTableUrl.getText();
+        //return credentialTableUrl.getText();
+        return this.credentialTableUrl.getAttribute("innerHTML");
     }
 
     public String getCredentialTableUserName() {
-        return credentialTableUserName.getText();
+        //return credentialTableUserName.getText();
+        return this.credentialTableUserName.getAttribute("innerHTML");
     }
 
     public String getCredentialTableUserPassword() {
-        return credentialTableUserPassword.getText();
+        //return credentialTableUserPassword.getText();
+        return this.credentialTableUserPassword.getAttribute("innerHTML");
     }
 
     public void editCredential1() {
         this.editCredential.click();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -153,12 +174,14 @@ public class CredentialPage {
 
     public void editCredential2(String editedpassword) {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        this.credentialPassword.sendKeys(editedpassword);
-        this.saveCredential.click();
+        //this.credentialPassword.sendKeys(editedpassword);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + editedpassword + "';", this.credentialPassword);
+        //this.saveCredential.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", saveCredential);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -171,7 +194,8 @@ public class CredentialPage {
     }
 
     public void clickDeleteCredential() {
-        this.deleteCredential.click();
+        //this.deleteCredential.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteCredential);
     }
 
     public int getCredentialTableSize() {
