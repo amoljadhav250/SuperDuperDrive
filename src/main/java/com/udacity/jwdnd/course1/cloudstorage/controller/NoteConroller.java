@@ -51,8 +51,9 @@ public class NoteConroller {
             Note newNote = new Note(noteId, title, desc, userId);
             noteService.addNote(newNote);
         } else if (noteService.getNote(noteId) != null) {
-            if (noteService.getNotByTitle(title, userId).getNoteid() == noteId) {
-
+            if (noteService.getNotByTitle(title, userId) == null) {
+                noteService.updateNote(noteId, title, desc);
+            } else if (noteService.getNotByTitle(title, userId).getNoteid() == noteId) {
                 noteService.updateNote(noteId, title, desc);
             } else {
                 model.addAttribute("result", "warn");

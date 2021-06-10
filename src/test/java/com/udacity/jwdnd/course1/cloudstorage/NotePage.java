@@ -97,12 +97,12 @@ public class NotePage {
 
     public String getTitle() {
         //return this.noteTitleDisplay.getAttribute("innerHTML");
-        return this.noteTitleDisplay.getText();
+        return this.noteTitleDisplay.getAttribute("innerHTML");
     }
 
     public String getNoteDesc() {
         //return this.noteDescDisplay.getAttribute("innerHTML");
-        return this.noteDescDisplay.getText();
+        return this.noteDescDisplay.getAttribute("innerHTML");
     }
 
     public void editNote(String updatedNoteDesc) {

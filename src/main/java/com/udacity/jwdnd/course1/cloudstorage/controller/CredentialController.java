@@ -53,7 +53,9 @@ public class CredentialController {
         } else if (credentialService.getCredential(credentialid) == null) {
             credentialService.addCredential(url, authentication.getName(), username, encodedKey, encryptedPassword);
         } else if ((credentialService.getCredential(credentialid) != null)) {
-            if (credentialService.getCredentialByUsername(userId, username).getCredentialid() == credentialid) {
+            if (credentialService.getCredentialByUsername(userId, username) == null) {
+                credentialService.updateCredential(credentialid, username, url, encodedKey, encryptedPassword);
+            } else if (credentialService.getCredentialByUsername(userId, username).getCredentialid() == credentialid) {
                 credentialService.updateCredential(credentialid, username, url, encodedKey, encryptedPassword);
             } else {
 
